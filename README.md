@@ -1,7 +1,7 @@
 # pg_pathman-helper
 Ajuda no pg_pathman / Help pg_pathman
 
-Descritivo tudo sobre pg_patman...
+Descritivo tudo sobre pg_pathman...
 
 Desc Title  | Link
 ------------- | -------------
