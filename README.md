@@ -1,6 +1,8 @@
 # pg_pathman-helper
 Ajuda no pg_pathman / Help pg_pathman
 
+Descritivo tudo sobre pg_patman...
+
 pg_pathman:
 https://github.com/postgrespro/pg_pathman
 
@@ -49,13 +51,13 @@ Antes de executar uma consulta SELECT, pg_pathman atravessa a árvore de condiç
 'VARIABLE OP CONST' onde VARIABLE é partitioning key e 'OP' é o operador ( =, <, <=, >, >=) e 'CONST' é o valor
 EX.: 'WHERE id = 150'
 
-------------------------------------------------------- pg_pathman RANGE X HASH -------------------------------------------------------
+------------------------- pg_pathman RANGE X HASH ------------------------ 
 
 RANGE 	- Mapeia linhas para partições usando intervalos de chave de particionamento atribuídos a cada partição. 
 A otimização é obtida usando o algoritmo de busca binário;
 HASH 	- Mapeia linhas para partições usando uma função de hash genérica.
 
-------------------------------------------------------- Destaques do recurso -------------------------------------------------------
+-------------------------  Destaques do recurso ------------------------- 
 
 - Esquemas de particionamento HASH e RANGE;
 - Gerenciamento de partições automático e manual;
@@ -71,7 +73,7 @@ HASH 	- Mapeia linhas para partições usando uma função de hash genérica.
 - Suporte FDW (Foreign data wrappers) (foreign partitions);
 - Vários GUC toggles e configurações.
 
-------------------------------------------------------- Funções Disponíveis HASH  -------------------------------------------------------
+-------------------------  Funções Disponíveis HASH  ------------------------- 
 
 create_hash_partitions(relation         REGCLASS, 				'TABELA PARTICIONAR'
                        attribute        TEXT,					'ATRIBUTO DE PARTICIONAMENTO'
@@ -88,7 +90,7 @@ Consulte partition_table_concurrently () para obter uma maneira livre de bloquei
 O callback de criação de partição é chamado para cada partição se definido previamente (veja set_init_callback())
 
 
-------------------------------------------------------- Funções Disponíveis RANGE  -------------------------------------------------------
+-------------------------  Funções Disponíveis RANGE  ------------------------- 
 
 create_range_partitions(relation       REGCLASS,				'TABELA PARTICIONAR'
                         attribute      TEXT,					'ATRIBUTO DE PARTICIONAMENTO'
