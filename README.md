@@ -3,24 +3,14 @@ Ajuda no pg_pathman / Help pg_pathman
 
 Descritivo tudo sobre pg_patman...
 
-pg_pathman:
-https://github.com/postgrespro/pg_pathman
+Desc Title  | Link
+------------- | -------------
+pg_pathman  | https://github.com/postgrespro/pg_pathman
+Data Rotation | https://zilder.github.io/blog/2016/10/21/data-rotation-with-pg-pathman/
+How Does Pg_pathman Handle Filter Conditions? | http://akorotkov.github.io/blog/2016/03/14/pg_pathman-condition-processing/
+performance particionmento normal X pg_pathman | http://postgrespro.livejournal.com/48364.html
+perfomance particionamento do 'concorrente nativo' pg_parTman | http://akorotkov.github.io/blog/2016/03/18/pg_pathman-update-delete-benchmark/
 
-Data Rotation With `pg_pathman`
-
-https://zilder.github.io/blog/2016/10/21/data-rotation-with-pg-pathman/
-
-How Does Pg_pathman Handle Filter Conditions?
-
-http://akorotkov.github.io/blog/2016/03/14/pg_pathman-condition-processing/
-
-performance particionmento normal X pg_pathman
-
-http://postgrespro.livejournal.com/48364.html
-
-perfomance particionamento do 'concorrente nativo' pg_parTman
-
-http://akorotkov.github.io/blog/2016/03/18/pg_pathman-update-delete-benchmark/
 
 # LEIS DE PARTICIONAMENTO DE TABELAS
 - a coluna de referência de particionamento não pode ser null ou seja... o atributo do campo só pode ser 'NOT NULL'
