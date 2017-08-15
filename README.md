@@ -34,9 +34,11 @@ Cada linha dessa tabela é movida para uma única partição de acordo com a cha
 O PostgreSQL suporta o particionamento via herança de tabela: cada partição deve ser criada como uma tabela subordinada com 
 CHECK CONSTRAINT. Por exemplo:
 
-$ CREATE TABLE test (id SERIAL PRIMARY KEY, title TEXT);
-$ CREATE TABLE test_1 (CHECK ( id >= 100 AND id < 200 )) INHERITS (test);
-$ CREATE TABLE test_2 (CHECK ( id >= 200 AND id < 300 )) INHERITS (test);
+```sql
+CREATE TABLE test (id SERIAL PRIMARY KEY, title TEXT);
+CREATE TABLE test_1 (CHECK ( id >= 100 AND id < 200 )) INHERITS (test);
+CREATE TABLE test_2 (CHECK ( id >= 200 AND id < 300 )) INHERITS (test);
+```
 
 Apesar da flexibilidade, essa abordagem força o banco a realizar uma pesquisa exaustiva e a 
 verificar restrições em cada partição para determinar se ela deve estar presente no plano ou não. 
@@ -51,13 +53,13 @@ Antes de executar uma consulta SELECT, pg_pathman atravessa a árvore de condiç
 'VARIABLE OP CONST' onde VARIABLE é partitioning key e 'OP' é o operador ( =, <, <=, >, >=) e 'CONST' é o valor
 EX.: 'WHERE id = 150'
 
-------------------------- pg_pathman RANGE X HASH ------------------------ 
+## pg_pathman RANGE X HASH ##
 
 RANGE 	- Mapeia linhas para partições usando intervalos de chave de particionamento atribuídos a cada partição. 
 A otimização é obtida usando o algoritmo de busca binário;
 HASH 	- Mapeia linhas para partições usando uma função de hash genérica.
 
--------------------------  Destaques do recurso ------------------------- 
+## Destaques do recurso ##
 
 - Esquemas de particionamento HASH e RANGE;
 - Gerenciamento de partições automático e manual;
@@ -73,14 +75,17 @@ HASH 	- Mapeia linhas para partições usando uma função de hash genérica.
 - Suporte FDW (Foreign data wrappers) (foreign partitions);
 - Vários GUC toggles e configurações.
 
--------------------------  Funções Disponíveis HASH  ------------------------- 
+## Funções Disponíveis HASH ##
 
+```sql
 create_hash_partitions(relation         REGCLASS, 				'TABELA PARTICIONAR'
                        attribute        TEXT,					'ATRIBUTO DE PARTICIONAMENTO'
                        partitions_count INTEGER,				'CRIAR X PARTICIONAMENTOS'
                        partition_data   BOOLEAN DEFAULT TRUE,	'Se partition_data for true, então todos os dados serão automaticamente copiados da tabela pai para partições'
                        partition_names  TEXT[] DEFAULT NULL,	
                        tablespaces      TEXT[] DEFAULT NULL)
+ ```
+`		       
 					   
 Executa o particionamento HASH para a relação por um atributo de chave inteiro. 
 O parâmetro partitions_count especifica o número de partições a serem criadas; 
@@ -89,15 +94,17 @@ Observe que a migração de dados pode demorar um pouco para terminar ea tabela 
 Consulte partition_table_concurrently () para obter uma maneira livre de bloqueio para migrar dados. 
 O callback de criação de partição é chamado para cada partição se definido previamente (veja set_init_callback())
 
+## Funções Disponíveis RANGE ##
 
--------------------------  Funções Disponíveis RANGE  ------------------------- 
 
+```sql
 create_range_partitions(relation       REGCLASS,				'TABELA PARTICIONAR'
                         attribute      TEXT,					'ATRIBUTO DE PARTICIONAMENTO'
                         start_value    ANYELEMENT,
                         p_interval     ANYELEMENT / INTERVAL,
                         p_count        INTEGER DEFAULT NULL
                         partition_data BOOLEAN DEFAULT TRUE)
+ ```
 						
 O parâmetro start_value especifica o valor inicial, p_interval define o intervalo padrão para partições criadas automaticamente 
 ou partições criadas com append_range_partition () ou prepend_range_partition () 
@@ -105,13 +112,14 @@ ou partições criadas com append_range_partition () ou prepend_range_partition 
 se não for definido, pg_pathman tenta determinar com base em valores de atributo). O callback de criação de partição é chamado para cada partição se 
 definido previamente.
 
+```sql
 create_partitions_from_range(relation       REGCLASS,			'TABELA PARTICIONAR'
                              attribute      TEXT,				'ATRIBUTO DE PARTICIONAMENTO'
                              start_value    ANYELEMENT,
                              end_value      ANYELEMENT,
                              p_interval     ANYELEMENT / INTERVAL,
                              partition_data BOOLEAN DEFAULT TRUE)
-
+ ```
 						
 Executa o particionamento RANGE do intervalo especificado para a relação por atributo de chave de particionamento. 
 O callback de criação de partição é chamado para cada partição se definido previamente.
